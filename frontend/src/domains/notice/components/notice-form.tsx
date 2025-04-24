@@ -77,8 +77,8 @@ export const NoticeForm: React.FC<Props> = ({
     <form onSubmit={onSubmit}>
       <TextField
         {...register('title')}
-        error={Boolean(errors.content)}
-        helperText={errors.content?.message}
+        error={Boolean(errors.title)}
+        helperText={errors.title?.message}
         type='text'
         label='Title'
         fullWidth
@@ -87,8 +87,8 @@ export const NoticeForm: React.FC<Props> = ({
       />
       <TextField
         {...register('content')}
-        error={Boolean(errors.description)}
-        helperText={errors.description?.message}
+        error={Boolean(errors.content)}
+        helperText={errors.content?.message}
         type='text'
         label='Description'
         size='small'
