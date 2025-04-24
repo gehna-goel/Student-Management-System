@@ -6,6 +6,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useDeleteStudentMutation } from '../api/student-api';
+import { toast } from 'react-toastify';
 
 import { PageContentHeader } from '@/components/page-content-header';
 import { getErrorMsg } from '@/utils/helpers/get-error-message';
@@ -32,6 +34,20 @@ export const ListStudents: React.FC = () => {
 
   const searchStudent = (payload: StudentFilter) => {
     setFilter(payload);
+  };
+
+  const [deleteStudent] = useDeleteStudentMutation();
+
+  const handleDelete = async (id: string) => {
+  const confirm = window.confirm('Are you sure you want to delete this student?');
+  if (!confirm) return;
+
+  try {
+    await deleteStudent(id).unwrap();
+    toast.success('Student deleted successfully');
+  } catch (err) {
+    toast.error('Failed to delete student');
+  }
   };
 
   return (
